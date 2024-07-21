@@ -1,0 +1,31 @@
+{
+  "name": "@deann/utils",
+  "version": "1.0.1",
+  "description": "common tool library",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "publish": "npm publish --access public",
+    "release": "npm run build && npm run publish"
+  },
+  "author": "deann",
+  "license": "ISC",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "change-case": "^5.4.4",
+    "create-banner": "^2.0.0",
+    "dayjs": "^1.11.12",
+    "lodash-es": "^4.17.21",
+    "rollup": "^4.19.0",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
+}
