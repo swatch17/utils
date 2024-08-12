@@ -6,7 +6,8 @@ import createBanner from 'create-banner';
 import * as changeCase from 'change-case';
 import pkg from './package.json' assert { type: 'json' };
 import typescript from '@rollup/plugin-typescript';
-
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { babel } from '@rollup/plugin-babel';
 
 // const pkg = require("./package");
 
@@ -29,22 +30,32 @@ export default defineConfig({
       name: 'utils',
       globals: { 'lodash-es/isString': 'lodash-es' },
       sourcemap: true,
+      globals: { dayjs: 'dayjs' },
     },
     {
       file: 'dist/index.min.js',
       format: 'esm',
+      sourcemap: true,
       plugins: [terser()],
+      globals: { dayjs: 'dayjs' },
     },
   ],
 
   plugins: [
-    json(),
     commonjs({
       strictRequires: true,
       exclude: 'node_modules/**',
-      include: ['src/**/*.js', 'lib/**/*.js'],
+      include: ['src/**/*.js', 'lib/**/*.js', '/node_modules/'],
+      requireReturnsDefault: 'auto',
+      transformMixedEsModules: true,
     }),
-    typescript(),
+    typescript({ sourceMap: true }),
+    babel({ babelHelpers: 'bundled' }),
+    nodeResolve({
+      browser: true,
+      moduleDirectories: ['node_modules'],
+    }),
+    json(),
   ],
-  // external: ['lodash-es']
+  external: ['lodash-es', 'dayjs'],
 });
