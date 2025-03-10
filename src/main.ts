@@ -274,3 +274,23 @@ export const getType = (obj) => {
     .slice(8, -1)
     .toLowerCase();
 };
+
+/**
+ * 将数据按月份分组
+ * @param {Array} data - 包含日期字段的数据数组
+ * @param {string} dateField - 日期字段的名称
+ * @returns {Object} - 按月份分组的数据对象
+ */
+function groupByMonth(data, dateField = 'date') {
+  return data.reduce((groups, item) => {
+      const date = new Date(item[dateField]);
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      
+      if (!groups[monthKey]) {
+          groups[monthKey] = [];
+      }
+      
+      groups[monthKey].push(item);
+      return groups;
+  }, {});
+}
