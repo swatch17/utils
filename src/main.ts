@@ -281,7 +281,7 @@ export const getType = (obj) => {
  * @param {string} dateField - 日期字段的名称
  * @returns {Object} - 按月份分组的数据对象
  */
-function groupByMonth(data, dateField = 'date') {
+export function groupByMonth(data, dateField = 'date') {
   return data.reduce((groups, item) => {
       const date = new Date(item[dateField]);
       const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
