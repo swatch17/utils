@@ -21,7 +21,7 @@ const banner = createBanner({
 });
 
 export default defineConfig({
-  input: './src/main.ts',
+  input: './src/index.ts',
   output: [
     {
       banner,
@@ -29,6 +29,7 @@ export default defineConfig({
       format: 'umd',
       name: 'utils',
       globals: { 'lodash-es/isString': 'lodash-es' },
+      plugins: [terser()],
       sourcemap: true,
       globals: { dayjs: 'dayjs' },
     },
