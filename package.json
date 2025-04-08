@@ -14,19 +14,19 @@
   "author": "deann",
   "license": "ISC",
   "dependencies": {
-    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-commonjs": "^26.0.3",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "change-case": "^5.4.4",
     "create-banner": "^2.0.0",
-    "dayjs": "^1.11.12",
+    "dayjs": "^1.11.13",
     "lodash-es": "^4.17.21",
-    "rollup": "^4.19.0",
-    "typescript": "^5.5.3"
+    "rollup": "^4.39.0",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-node-resolve": "^15.2.3"
+    "@rollup/plugin-node-resolve": "^15.3.1"
   }
 }

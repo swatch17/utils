@@ -96,7 +96,7 @@ export const formatTime = (t) => {
  * @returns 格式化后的日期字符串
  */
 export const formatDate = (date, type = 'date') => {
-  if (!date) return ''
+  if (!date) return '';
   const obj = {
     zero: dayjs(date).format('YYYY-MM-DD 00:00:00'),
     time: dayjs(date).format('YYYY-MM-DD HH:mm:ss'),
@@ -104,11 +104,10 @@ export const formatDate = (date, type = 'date') => {
     dateCN: dayjs(date).format('YYYY年MM月DD日'),
     yymmdd: dayjs(date).format('YYYYMMDD'),
     year: dayjs(date).format('YYYY'),
-    sprit: dayjs(date).format('YYYY/MM/DD')
-  }
-  return (type && obj[type]) || obj.time
-}
-
+    sprit: dayjs(date).format('YYYY/MM/DD'),
+  };
+  return (type && obj[type]) || obj.time;
+};
 
 /**
  * 格式化数据字典选项
@@ -116,14 +115,22 @@ export const formatDate = (date, type = 'date') => {
  * @param list 数据字典列表
  * @returns 格式化后的数据字典选项
  */
-export const formatDict = (list) => {
+export const formatDict = (list, key = 'name', valueKey = 'id') => {
   if (!isEmpty(list) && isArray(list)) {
     return list.map((item) => ({
       ...item,
-      value: item.id,
-      label: item.title || item.name,
+      value: item?.[valueKey],
+      label: item?.[key],
       valueList: item?.optionalValue ?? '',
     }));
+
+    // return list.reduce(
+    //   (acc, cur) => [
+    //     ...acc,
+    //     { ...cur, value: cur[valueKey], label: cur[key] },
+    //   ],
+    //   []
+    // );
   }
   return [];
 };
@@ -283,14 +290,16 @@ export const getType = (obj) => {
  */
 export function groupByMonth(data, dateField = 'date') {
   return data.reduce((groups, item) => {
-      const date = new Date(item[dateField]);
-      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-      
-      if (!groups[monthKey]) {
-          groups[monthKey] = [];
-      }
-      
-      groups[monthKey].push(item);
-      return groups;
+    const date = new Date(item[dateField]);
+    const monthKey = `${date.getFullYear()}-${String(
+      date.getMonth() + 1
+    ).padStart(2, '0')}`;
+
+    if (!groups[monthKey]) {
+      groups[monthKey] = [];
+    }
+
+    groups[monthKey].push(item);
+    return groups;
   }, {});
 }
